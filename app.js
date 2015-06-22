@@ -34,8 +34,8 @@ var filter = {
     language: 'en',
 }
 io.sockets.on('connection', function (socket){
-    //var stream = twitter.stream('statuses/filter', filter);
-    var stream = twitter.stream('statuses/sample', {language: 'en'});
+    var stream = twitter.stream('statuses/filter', filter);
+    //var stream = twitter.stream('statuses/sample', {language: 'en'});
 
     stream.on('tweet', onTweet);
 });
