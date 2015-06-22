@@ -5,7 +5,10 @@ var express = require('express')
   , Twit = require('twit')
   , io = require('socket.io').listen(server);
 
-server.listen(4040);
+var port = process.env.PORT || 8080;
+server.listen(port, function() {
+    console.log('Our app is running on http://localhost:' + port);
+});;
 
 // Load the index page when the browser requests for the root directory
 app.get('/', function (req, res) {
