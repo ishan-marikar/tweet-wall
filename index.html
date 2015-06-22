@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TweetHose</title>
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    
+    <!-- THE ACTUAL PLACEHOLDER -->
+    <div class="container"></div>
+
+    <!-- TEMPLATE -->
+    <script id="tweet-template" type="text/x-handlebars-template">
+
+        <div id="back-image" style="background-image: url({{{image}}});"></div>
+        <div class="tweet">
+            <div class="profile-picture"> 
+                <img class="image" src="{{{avatar}}}">
+            </div>
+            <a href="http://twitter.com/{{user}}" target="_blank">
+                <div class="tweet-link"> {{{user}}} </div>
+            </a>
+            <div class="status"> {{{status}}} </div>
+            <img class="image" src="{{{image}}}">
+        </div>    
+    </script>
+
+    <!-- REQUIRED LIBRARIES -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js"></script>
+
+    <!-- HERE BE DRAGONS -->
+    <script type="text/javascript">
+    (function($) {
+        var compiled = {};
+        $.fn.handlebars = function(template, data) {
+          if (template instanceof jQuery) {
+            template = $(template).html();
+          }
+ 
+          compiled[template] = Handlebars.compile(template);
+          this.html(compiled[template](data));
+        };
+    })(jQuery);
+
+    $(function () {
+        $('.container').fadeOut();
+        // Grab the template script
+        var theTemplateScript = $("#tweet-template").html();
+
+        // Connect to our running instance of Node
+        var socket = io.connect('http://localhost:4040');
+
+        socket.on('stream', function(tweet, user, avatar, media) {;
+            $('.container').fadeIn();
+            // Define our data object
+            var context={
+              "avatar": avatar,
+              "status": tweet,
+              "user"  : user,
+              "image" : media
+            };
+
+            // Pass our data to the template
+            $('.container').handlebars($('#tweet-template'), context);
+        });
+    });
+    </script>
+    
+</body>
+</html>
