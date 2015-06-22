@@ -3,9 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <title>TweetHose</title>
+
+    <!-- APPLE STUFF -->
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- STYLES AND FONTS -->
+    <link href='http://fonts.googleapis.com/css?family=Roboto:400,100' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="/styles.css">
+
 </head>
 <body>
     
@@ -14,9 +20,8 @@
 
     <!-- TEMPLATE -->
     <script id="tweet-template" type="text/x-handlebars-template">
-
-        <div id="back-image" style="background-image: url({{{image}}});"></div>
         <div class="tweet">
+            <div id="back-image" style="background-image: url({{{image}}});"></div>
             <div class="profile-picture"> 
                 <img class="image" src="{{{avatar}}}">
             </div>
@@ -35,7 +40,10 @@
 
     <!-- HERE BE DRAGONS -->
     <script type="text/javascript">
-    (function($) {
+
+    // Maybe for a later date.
+
+    /*(function($) {
         var compiled = {};
         $.fn.handlebars = function(template, data) {
           if (template instanceof jQuery) {
@@ -47,17 +55,22 @@
         };
     })(jQuery);
 
-    $(function () {
-        $('.container').fadeOut();
-        // Grab the template script
+    $('.container').handlebars($('#tweet-template'), context);
+    */
+
+    function render(context){
         var theTemplateScript = $("#tweet-template").html();
+        var theTemplate = Handlebars.compile(theTemplateScript);
+        var theCompiledHtml = theTemplate(context);
+        return theCompiledHtml
+    }
 
-        // Connect to our running instance of Node
+    $(function () {
+
         var socket = io.connect();
+        socket.on('stream', function(tweet, user, avatar, media) {
+            console.log(tweet + user + avatar + media) // DEBUG
 
-        socket.on('stream', function(tweet, user, avatar, media) {;
-            $('.container').fadeIn();
-            // Define our data object
             var context={
               "avatar": avatar,
               "status": tweet,
@@ -65,10 +78,10 @@
               "image" : media
             };
 
-            // Pass our data to the template
-            $('.container').handlebars($('#tweet-template'), context);
+            $('.container').append(render(context));
         });
     });
+
     </script>
     
 </body>

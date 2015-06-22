@@ -10,17 +10,6 @@ server.listen(port, function() {
     console.log('Our app is running on http://localhost:' + port);
 });;
 
-// Load the index page when the browser requests for the root directory
-app.get('/', function (req, res) {
-    console.log("Responding with index.html");
-    res.sendFile(__dirname + "/index.html");
-});
-
-// Send the CSS when requested
-app.get('/styles.css', function (req, res) {
-    res.sendFile(__dirname + "/styles.css");
-});
-
 var twitter = new Twit({
     consumer_key        : "HQmu65XzfymaQJARIyIPZZcrm",
     consumer_secret     : "a6E5xMPpzRtvWtgXFymhv9oPZXxguqoKjjAZd6z4iaDU2kWkGL",
@@ -34,8 +23,8 @@ var filter = {
     language: 'en',
 }
 io.sockets.on('connection', function (socket){
-    var stream = twitter.stream('statuses/filter', filter);
-    //var stream = twitter.stream('statuses/sample', {language: 'en'});
+    //var stream = twitter.stream('statuses/filter', filter);
+    var stream = twitter.stream('statuses/sample', {language: 'en'});
 
     stream.on('tweet', onTweet);
 });
@@ -53,13 +42,22 @@ function onTweet (tweet) {
     // Does the Tweet have an image attached?
 
     if ( tweet.entities['media'] ) {
-      if ( tweet.entities['media'][0].type == "photo" ) {
         mediaUrl = tweet.entities['media'][0].media_url;
-      } else {
+    } else {
         mediaUrl = null;
-      }
     }
 
     // Send the Tweet to the browser
     io.sockets.emit('stream',turl, tweet.user.screen_name, tweet.user.profile_image_url, mediaUrl);
 }
+
+
+// Load the index page when the browser requests for the root directory
+app.get('/', function (req, res) {
+    res.sendFile(__dirname + "/index.html");
+});
+
+// Send the CSS when requested
+app.get('/styles.css', function (req, res) {
+    res.sendFile(__dirname + "/styles.css");
+});
