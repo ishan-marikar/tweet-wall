@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TweetHose</title>
+
+    <!-- APPLE STUFF -->
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+    <!-- STYLES AND FONTS -->
+    <link href='//fonts.googleapis.com/css?family=Roboto:400,100' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="/styles.css">
+
+</head>
+<body>
+        
+    <div class="loader"></div>
+
+    <div class="background" style="display: none;">
+        <span class="larger">EMPTY</span>
+        <span class="smaller"></span>
+    </div>
+
+    <!-- THE ACTUAL PLACEHOLDER -->
+    <div class="container"></div>
+    
+
+    <!-- TEMPLATE -->
+    <script id="tweet-template" type="text/x-handlebars-template">
+        <div class="tweet">
+            <div id="back-image" style="background-image: url({{{image}}});"></div>
+            <div class="profile-picture"> 
+                <img class="image" src="{{{avatar}}}">
+            </div>
+            <a href="http://twitter.com/{{user}}" target="_blank">
+                <div class="tweet-link"> {{{user}}} </div>
+            </a>
+            <div class="status"> {{{status}}} </div>
+            <span class="timeago" data-livestamp="{{created}}"></span>
+            <img class="image media" src="{{{image}}}">
+        </div>    
+    </script>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js" type="text/javascript"></script>
+    <script src="/socket.io/socket.io.js" type="text/javascript"></script>
+    <script src="/moment.js" type="text/javascript"></script>
+    <script src="/livestamp.min.js" type="text/javascript"></script>
+    <script src="/imgLoader.js" type="text/javascript"></script>
+    <script src="/tweets.js" type="text/javascript"></script>
+    
+</body>
+</html>
