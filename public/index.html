@@ -1,8 +1,9 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>TweetHose</title>
+    <title>Twitter Wall</title>
 
     <!-- APPLE STUFF -->
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -10,21 +11,27 @@
 
     <!-- STYLES AND FONTS -->
     <link href='//fonts.googleapis.com/css?family=Roboto:400,100' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="/styles.css">
+    <link rel="stylesheet" href="/css/styles.css">
 
 </head>
+
 <body>
-        
     <div class="loader"></div>
-
-    <div class="background" style="display: none;">
-        <span class="larger">EMPTY</span>
-        <span class="smaller"></span>
+    <div class="header">
+        <div class="message">If you want your message here, just post a tweet on twitter with the <span class="highlight hash"></span> hashtag.</div>
     </div>
-
-    <!-- THE ACTUAL PLACEHOLDER -->
-    <div class="container"></div>
-    
+    <div class="wrapper">
+        <div class="background" style="display: none;">
+            <span class="larger">EMPTY</span>
+            <span class="smaller"></span>
+        </div>
+        <!-- THE ACTUAL CONTENT -->
+        <div class="container"></div>
+        <div class="push"></div>
+    </div>
+    <div class="footer">
+        <div class="message">Made with &#10084; by Ishan Marikar.</div>
+    </div>
 
     <!-- TEMPLATE -->
     <script id="tweet-template" type="text/x-handlebars-template">
@@ -33,7 +40,7 @@
             <div class="profile-picture"> 
                 <img class="image" src="{{{avatar}}}">
             </div>
-            <a href="http://twitter.com/{{user}}" target="_blank">
+            <a href="http://twitter.com/{{screenname}}" target="_blank">
                 <div class="tweet-link"> {{{user}}} </div>
             </a>
             <div class="status"> {{{status}}} </div>
@@ -42,13 +49,14 @@
         </div>    
     </script>
 
+
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0/handlebars.js" type="text/javascript"></script>
     <script src="/socket.io/socket.io.js" type="text/javascript"></script>
-    <script src="/moment.js" type="text/javascript"></script>
-    <script src="/livestamp.min.js" type="text/javascript"></script>
-    <script src="/imgLoader.js" type="text/javascript"></script>
-    <script src="/tweets.js" type="text/javascript"></script>
+    <script src="/js/moment.js" type="text/javascript"></script>
+    <script src="/js/livestamp.min.js" type="text/javascript"></script>
+    <script src="/js/imgLoader.js" type="text/javascript"></script>
+    <script src="/js/application.js" type="text/javascript"></script>
     
 </body>
 </html>
