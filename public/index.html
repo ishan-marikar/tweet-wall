@@ -45,7 +45,10 @@
             </a>
             <div class="status"> {{{status}}} </div>
             <span class="timeago" data-livestamp="{{created}}"></span>
-            <img class="image media" src="{{{image}}}">
+            {{#if image}}
+              <img class="image media" src="{{{image}}}">
+            {{/if}}
+
         </div>
     </script>
 
