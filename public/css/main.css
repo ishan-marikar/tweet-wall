@@ -9,7 +9,7 @@ body {
   font-size: 2.5em;
   font-weight: 100;
   letter-spacing: -.03em;
-  background-color: #f5f3f1; }
+  background-color: #FBFBFB; }
 
 .push, .footer {
   clear: both;
@@ -20,20 +20,38 @@ body {
   top: 95%;
   width: 100%; }
 
+.container {
+  padding-top: 1em; }
+
 .tweet {
-  padding: 75px; }
+  padding: 75px;
+  background: #FFFFFF;
+  border: 1px solid #DCDCDC;
+  border-radius: 8px;
+  margin: auto;
+  margin-bottom: 2%; }
   .tweet a {
     text-decoration: none; }
   .tweet .tweet-link {
-    font-weight: 400; }
+    font-weight: 400;
+    color: #555555;
+    font-size: 32px;
+    padding-top: 0.7em; }
   .tweet .timeago {
     font-size: .5em; }
   .tweet .profile-picture img {
     width: 100px;
     height: 100px;
-    border-radius: 100px; }
+    border-radius: 100px;
+    border: 1px solid #DADADA; }
+  .tweet .status {
+    font-size: 20px;
+    font-weight: 200;
+    color: #7F7F7F; }
   .tweet .media {
-    padding-top: 20%; }
+    border-radius: 8px;
+    margin: 5% 5% 3% 5%;
+    width: 90%; }
 
 .wrapper {
   height: auto;
@@ -91,10 +109,13 @@ body {
 
 .message {
   font-size: .5em;
-  background-color: #f5f3f1;
+  background-color: #FFF;
   text-align: center;
-  text-transform: uppercase; }
+  text-transform: lowercase;
+  padding: 10px;
+  color: #5C5C5C; }
 
-/* change this */
 .highlight {
-  color: #943ca6; }
+  text-transform: uppercase;
+  font-weight: bold;
+  color: #0096E4; }

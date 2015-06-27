@@ -2,6 +2,7 @@ var Twit    = require("twit");
 var Moment  = require("moment");
 var express = require("express");
 var socket  = require("socket.io");
+var twitterConnection = require("./secret");
 
 // Global Variables
 var tweetsBuffer       = [];
@@ -25,12 +26,7 @@ var filter    = {
 };
 
 // Twitter Streaming API keys
-var twitter = new Twit({
-    consumer_key:        "HQmu65XzfymaQJARIyIPZZcrm",
-    consumer_secret:     "a6E5xMPpzRtvWtgXFymhv9oPZXxguqoKjjAZd6z4iaDU2kWkGL",
-    access_token:        "3008318582-ojFc5pPIlwZlUqyMFdn41x2YQmaDBlSR24HUVC6",
-    access_token_secret: "paGHQ4nB5sBxywWHRlgXBQe3Iez0mAnoN0jbxyBJvqC4G"
-});
+var twitter = twitterConnection.twitter;
 
 var namespace;
 if (!filteredTweets) {
@@ -84,6 +80,10 @@ function onTweet(tweet) {
     } else {
         media = null;
     }
+
+    // Remove _normal from the filename of the image to get the hi-res version
+    tweet.user.profile_image_url = tweet.user.profile_image_url.replace("_normal", "");
+    
     // Create a dictionary with the information that we need to send to the frontend
     var message = {
         text: tweet.text,
