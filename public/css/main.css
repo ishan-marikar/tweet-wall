@@ -1,0 +1,100 @@
+/* Styling will be done in SCSS because I like to */
+/* This files compiles to css styles.css */
+html, body {
+  height: 100%;
+  margin: 0; }
+
+body {
+  font-family: 'Roboto', sans-serif;
+  font-size: 2.5em;
+  font-weight: 100;
+  letter-spacing: -.03em;
+  background-color: #f5f3f1; }
+
+.push, .footer {
+  clear: both;
+  height: 4em; }
+
+.footer {
+  position: fixed;
+  top: 95%;
+  width: 100%; }
+
+.tweet {
+  padding: 75px; }
+  .tweet a {
+    text-decoration: none; }
+  .tweet .tweet-link {
+    font-weight: 400; }
+  .tweet .timeago {
+    font-size: .5em; }
+  .tweet .profile-picture img {
+    width: 100px;
+    height: 100px;
+    border-radius: 100px; }
+  .tweet .media {
+    padding-top: 20%; }
+
+.wrapper {
+  height: auto;
+  height: 100%;
+  min-height: 100%;
+  margin: 0 auto -4em; }
+  .wrapper .background {
+    width: 100%;
+    min-width: 100%;
+    height: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0; }
+    .wrapper .background .smaller {
+      font-size: .7em;
+      transform: translate3d(-50%, 0%, 0);
+      text-transform: none; }
+    .wrapper .background span {
+      font-family: helvetica;
+      font-size: 200px;
+      font-weight: 900;
+      line-height: 180px;
+      position: fixed;
+      z-index: -1;
+      top: 50%;
+      left: 50%;
+      height: 200px;
+      -webkit-transform: translate3d(-50%, -50%, 0);
+      -moz-transform: translate3d(-50%, -50%, 0);
+      -ms-transform: translate3d(-50%, -50%, 0);
+      -o-transform: translate3d(-50%, -50%, 0);
+      transform: translate3d(-50%, -50%, 0);
+      text-transform: uppercase;
+      opacity: 1;
+      color: #00000f;
+      color: rgba(0, 0, 0, 0.07); }
+
+.no-js .loader {
+  display: none; }
+
+.js .loader {
+  position: absolute;
+  top: 0;
+  left: 100px;
+  display: block; }
+
+.loader {
+  position: fixed;
+  z-index: 9999;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: url(../img/preloader.gif) center no-repeat #fff; }
+
+.message {
+  font-size: .5em;
+  background-color: #f5f3f1;
+  text-align: center;
+  text-transform: uppercase; }
+
+/* change this */
+.highlight {
+  color: #943ca6; }
