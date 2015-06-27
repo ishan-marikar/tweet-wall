@@ -13,12 +13,18 @@ $(function() {
     socket.on("tweets", newTweet);
     socket.on("hashtag", function(serverHashtag) {
       hashtag = serverHashtag.hashtag[0];
-      jQuery('.background .smaller').text(hashtag);
-      jQuery('.message .hash').text(hashtag);
+      jQuery(".background .smaller").text(hashtag);
+      jQuery(".message .hash").text(hashtag);
     });
     if (!hasTweets()) {
       jQuery(".background").fadeIn();
     }
+
+    $(window).load(function() {
+        $(".wrapper").raptorize({
+            'enterOn' : 'konami-code'
+        });
+    });
   });
 });
 
