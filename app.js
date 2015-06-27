@@ -1,17 +1,17 @@
-var Twit = require("twit");
-var Moment = require("moment");
+var Twit    = require("twit");
+var Moment  = require("moment");
 var express = require("express");
-var socket = require("socket.io");
+var socket  = require("socket.io");
 
 // Global Variables
-var tweetsBuffer = [];
+var tweetsBuffer       = [];
 var currentOpenSockets = 0;
-var filteredTweets = true;
-var port = process.env.PORT || 8080;
+var filteredTweets     = true;
+var port               = process.env.PORT || 8080;
 
-var app = express();
+var app    = express();
 var server = app.listen(port);
-var io = socket.listen(server);
+var io     = socket.listen(server);
 
 app.use('/', express.static('public'));
 console.log("[*] Listening on " + port);
@@ -20,15 +20,15 @@ console.log("[*] Listening on " + port);
 
 // Tweet filter
 var watchList = ["#mnfh"];
-var filter = {
+var filter    = {
     language: "en",
 };
 
 // Twitter Streaming API keys
 var twitter = new Twit({
-    consumer_key: "HQmu65XzfymaQJARIyIPZZcrm",
-    consumer_secret: "a6E5xMPpzRtvWtgXFymhv9oPZXxguqoKjjAZd6z4iaDU2kWkGL",
-    access_token: "3008318582-ojFc5pPIlwZlUqyMFdn41x2YQmaDBlSR24HUVC6",
+    consumer_key:        "HQmu65XzfymaQJARIyIPZZcrm",
+    consumer_secret:     "a6E5xMPpzRtvWtgXFymhv9oPZXxguqoKjjAZd6z4iaDU2kWkGL",
+    access_token:        "3008318582-ojFc5pPIlwZlUqyMFdn41x2YQmaDBlSR24HUVC6",
     access_token_secret: "paGHQ4nB5sBxywWHRlgXBQe3Iez0mAnoN0jbxyBJvqC4G"
 });
 
@@ -58,6 +58,9 @@ stream.on("reconnect", function(request, response, connectInterval) {
 
 stream.on("tweet", onTweet);
 
+/**
+ * This method is a callback for whenever a new tweet is recieved.
+ */
 function onTweet(tweet) {
 
     // Make the links in the tweet click-able
@@ -75,14 +78,13 @@ function onTweet(tweet) {
             tweet.created_at
         )
     ).format();
-
-
+    // Extract the first image in a tweet, if it exists
     if (tweet.entities.media) {
         media = tweet.entities.media[0].media_url;
     } else {
         media = null;
     }
-
+    // Create a dictionary with the information that we need to send to the frontend
     var message = {
         text: tweet.text,
         user: {
@@ -93,7 +95,7 @@ function onTweet(tweet) {
         media: media,
         created_time: date
     };
-    
+
     // Trying to "peek()" into the array. Not really all that elegant. I know.
     if( message !== tweetsBuffer[tweetsBuffer.length - tweetsBuffer.length]){
         console.log(message);
@@ -102,7 +104,10 @@ function onTweet(tweet) {
     }
 }
 
-// -------------------------------- SOCKET ---------------------------------
+// --------------------------------- SOCKET ------------------------------------
+// Upoun connection increment the current currentOpenSockets variable and start
+// the twitter stream. Upoun disconnection, decrement the currentOpenSockets
+// variable and close the stream IF we have no more currently open sockets.
 io.sockets.on("connection", function(socket){
     console.log("[*] Client " + socket.id + " has connected");
     if (currentOpenSockets <= 0) {
@@ -110,13 +115,13 @@ io.sockets.on("connection", function(socket){
         console.log("\tFirst active client. Start Twitter stream");
         stream.start();
     }
- 
+
     currentOpenSockets++;
- 
+
     socket.on("disconnect", function() {
         console.log("[!] Client " + socket.id + " has disconnected");
         currentOpenSockets--;
- 
+
         if (currentOpenSockets <= 0) {
             currentOpenSockets = 0;
             console.log("[*] No clients connected. Closing Twitter stream.");
@@ -124,10 +129,13 @@ io.sockets.on("connection", function(socket){
         }
     });
 
+    // We send the hashtag in our watchlist to the the frontend, so we we have
+    // very few places to change the watchlist when we have to.
     io.sockets.connected[socket.id].emit('hashtag', {
         hashtag: watchList
     });
-
+    // Upoun connection, we send all the tweets we've already stored to the
+    // client that specifically connected.
     for (var i = tweetsBuffer.length - 1; i >= 0; i--) {
         io.sockets.connected[socket.id].emit('tweets', tweetsBuffer[i]);
     }
