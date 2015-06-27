@@ -80,6 +80,10 @@ function onTweet(tweet) {
     } else {
         media = null;
     }
+
+    // Remove _normal from the filename of the image to get the hi-res version
+    tweet.user.profile_image_url = tweet.user.profile_image_url.replace("_normal", "");
+    
     // Create a dictionary with the information that we need to send to the frontend
     var message = {
         text: tweet.text,
