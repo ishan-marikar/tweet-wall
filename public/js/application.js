@@ -44,7 +44,6 @@ function newTweet(tweets) {
     jQuery(".container").append(render(context));
     console.log(".. no tweets");
   }
-  new Audio("../etc/bell.mp3").play();
 }
 /**
  * Abstract function to render Handlebars templates
