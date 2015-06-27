@@ -10,3 +10,6 @@ JS
 * jQuery
 * Moment.js
 
+# Dev
+npm install
+gulp sass:watch
