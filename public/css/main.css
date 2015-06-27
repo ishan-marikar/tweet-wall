@@ -17,8 +17,10 @@ body {
 
 .footer {
   position: fixed;
-  top: 95%;
-  width: 100%; }
+  top: 94%;
+  height: 5%;
+  width: 100%;
+  padding: 5px; }
 
 .container {
   padding-top: 1em; }
@@ -29,29 +31,32 @@ body {
   border: 1px solid #DCDCDC;
   border-radius: 8px;
   margin: auto;
-  margin-bottom: 2%; }
+  margin-bottom: 2%;
+  width: 30%; }
   .tweet a {
     text-decoration: none; }
   .tweet .tweet-link {
     font-weight: 400;
     color: #555555;
-    font-size: 32px;
-    padding-top: 0.7em; }
+    font-size: 28px; }
   .tweet .timeago {
-    font-size: .5em; }
-  .tweet .profile-picture img {
-    width: 100px;
-    height: 100px;
-    border-radius: 100px;
-    border: 1px solid #DADADA; }
+    font-size: 16px;
+    color: #B0B0B0; }
+  .tweet .profile-picture {
+    float: left;
+    margin-right: 2%; }
+    .tweet .profile-picture img {
+      width: 100px;
+      height: 100px;
+      border-radius: 100px;
+      border: 1px solid #DCDCDC; }
   .tweet .status {
     font-size: 20px;
     font-weight: 200;
-    color: #7F7F7F; }
+    color: #7F7F7F;
+    margin-bottom: -4%; }
   .tweet .media {
-    border-radius: 8px;
-    margin: 5% 5% 3% 5%;
-    width: 90%; }
+    border-radius: 8px; }
 
 .wrapper {
   height: auto;
