@@ -56,7 +56,10 @@ body {
     color: #7F7F7F;
     margin-bottom: -4%; }
   .tweet .media {
-    border-radius: 8px; }
+    border-radius: 8px;
+    width: 100%; }
+  .tweet img[src=""] {
+    display: none; }
 
 .wrapper {
   height: auto;
