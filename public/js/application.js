@@ -20,8 +20,8 @@ $(function() {
       jQuery(".background").fadeIn();
     }
 
-    $(window).load(function() {
-        $(".wrapper").raptorize({
+    jQuery(window).load(function() {
+        jQuery(".wrapper").raptorize({
             'enterOn' : 'konami-code'
         });
     });

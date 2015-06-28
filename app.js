@@ -2,6 +2,7 @@ var Twit    = require("twit");
 var Moment  = require("moment");
 var express = require("express");
 var socket  = require("socket.io");
+//require('dotenv').load()
 var twitterConnection = require("./secret");
 
 // Global Variables
