@@ -1,6 +1,26 @@
 /* Styling will be done in SCSS because I like to */
 /* This files compiles to css styles.css */
 
+/* Colour pallete */
+
+// ---> Main Page
+$page-background : #FBFBFB;
+$wrapper-text-foreground: #00000f;
+$loader-background: #FFFFFF;
+// ---> Tweet
+$tweet-background: #FFFFFF;
+$tweet-border: #DCDCDC;
+$tweet-image-border: #DCDCDC;
+$tweet-link-foreground: #555555;
+$tweet-time-foreground: #B0B0B0;
+$tweet-status-foreground: #7F7F7F;
+// ---> Header/Footer
+$message-foreground: #5C5C5C;
+$message-background: #FFFFFF;
+// --> Hashtag hightlight
+$hashtag-highlight-foreground: #0096E4;
+
+
 html, body {
     height: 100%;
     margin: 0;
@@ -13,7 +33,7 @@ body {
 
     letter-spacing: -.03em;
 
-    background-color: #FBFBFB;
+    background-color: $page-background;
 }
 
 .push {
@@ -36,8 +56,8 @@ body {
 
 .tweet {
     padding: 75px;
-    background: #FFFFFF;
-    border: 1px solid #DCDCDC;
+    background: $tweet-background;
+    border: 1px solid $tweet-border;
     border-radius: 8px;
     margin: auto;
     margin-bottom: 2%;
@@ -45,22 +65,22 @@ body {
 
 
     a {
-        text-decoration: none;  
+        text-decoration: none;
     }
 
     .tweet-link {
         font-weight: 400;
-        color: #555555;
+        color: $tweet-link-foreground;
         font-size: 28px;
     }
 
     .timeago {
         font-size: 16px;
-        color: #B0B0B0;
+        color: $tweet-time-foreground;
     }
 
     .profile-picture {
-        
+
         float: left;
         margin-right: 2%;
 
@@ -68,15 +88,15 @@ body {
             width: 100px;
             height: 100px;
             border-radius: 100px;
-            border: 1px solid #DCDCDC
+            border: 1px solid $tweet-image-border;
         }
 
     }
-    
+
     .status {
         font-size: 20px;
         font-weight: 200;
-        color: #7F7F7F;
+        color: $tweet-status-foreground;
         margin-bottom: -4%;
 
         a {
@@ -110,7 +130,7 @@ body {
         min-height: 100%;
         margin: 0;
         padding: 0;
-        
+
         .smaller {
             font-size: .7em;
 
@@ -139,10 +159,10 @@ body {
             text-transform: uppercase;
 
             opacity: 1;
-            color: #00000f;
+            color: $wrapper-text-foreground;
             color: rgba(0, 0, 0, .07);
         }
-    } 
+    }
 
 
 }
@@ -168,20 +188,20 @@ body {
     width: 100%;
     height: 100%;
 
-    background: url(../img/preloader.gif) center no-repeat #fff;
+    background: url(../img/preloader.gif) center no-repeat $loader-background;
 }
 
 .message {
     font-size: .5em;
-    background-color: #FFF;
+    background-color: $message-background;
     text-align: center;
     text-transform: lowercase;
     padding: 10px;
-    color: #5C5C5C;
+    color: $message-foreground;
 }
 
 .highlight {
     text-transform: uppercase;
     font-weight: bold;
-    color: #0096E4;
+    color: $hashtag-highlight-foreground;
 }

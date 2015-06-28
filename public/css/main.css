@@ -1,5 +1,6 @@
 /* Styling will be done in SCSS because I like to */
 /* This files compiles to css styles.css */
+/* Colour pallete */
 html, body {
   height: 100%;
   margin: 0; }
@@ -113,11 +114,11 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: url(../img/preloader.gif) center no-repeat #fff; }
+  background: url(../img/preloader.gif) center no-repeat #FFFFFF; }
 
 .message {
   font-size: .5em;
-  background-color: #FFF;
+  background-color: #FFFFFF;
   text-align: center;
   text-transform: lowercase;
   padding: 10px;
